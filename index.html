@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordMaster Pro | Smart Word Counter & Writing Tool</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="https://img.icons8.com/color/96/000000/word-count.png">
+</head>
+<body class="light-mode">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <i class="fas fa-keyboard"></i>
+                    <span>WordMaster<span class="highlight">Pro</span></span>
+                </div>
+                
+                <div class="nav-controls">
+                    <div class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-sun sun"></i>
+                        <i class="fas fa-moon moon"></i>
+                    </div>
+                    
+                    <div class="nav-buttons">
+                        <button class="btn btn-outline" id="exportBtn">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                        <button class="btn btn-primary" id="saveBtn">
+                            <i class="fas fa-save"></i> Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Smart Word Counter & Writing Assistant</h1>
+                <p>Count words, analyze text, and improve your writing in real-time</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container main-container">
+        <div class="content-wrapper">
+            <!-- Left Column - Text Input Area -->
+            <div class="left-column">
+                <div class="input-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-edit"></i> Enter Your Text</h2>
+                        <div class="card-actions">
+                            <button class="btn-icon" id="clearBtn" title="Clear All">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            <button class="btn-icon" id="pasteBtn" title="Paste Text">
+                                <i class="fas fa-paste"></i>
+                            </button>
+                            <button class="btn-icon" id="copyBtn" title="Copy Text">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="textarea-container">
+                        <textarea 
+                            id="textInput" 
+                            placeholder="Start typing or paste your text here... The word counter will update in real-time! 📝"
+                            rows="15"
+                            autofocus
+                        ></textarea>
+                        <div class="textarea-footer">
+                            <div class="char-info">
+                                <span id="charCountDisplay">0</span> characters
+                            </div>
+                            <div class="text-actions">
+                                <button class="btn-small" id="formatBtn">
+                                    <i class="fas fa-magic"></i> Format
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Word Analysis Card -->
+                <div class="analysis-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-chart-bar"></i> Text Analysis</h2>
+                    </div>
+                    <div class="analysis-grid">
+                        <div class="analysis-item">
+                            <div class="analysis-icon">
+                                <i class="fas fa-font"></i>
+                            </div>
+                            <div class="analysis-content">
+                                <div class="analysis-value" id="wordCount">0</div>
+                                <div class="analysis-label">Words</div>
+                            </div>
+                        </div>
+                        <div class="analysis-item">
+                            <div class="analysis-icon">
+                                <i class="fas fa-text-width"></i>
+                            </div>
+                            <div class="analysis-content">
+                                <div class="analysis-value" id="sentenceCount">0</div>
+                                <div class="analysis-label">Sentences</div>
+                            </div>
+                        </div>
+                        <div class="analysis-item">
+                            <div class="analysis-icon">
+                                <i class="fas fa-paragraph"></i>
+                            </div>
+                            <div class="analysis-content">
+                                <div class="analysis-value" id="paragraphCount">0</div>
+                                <div class="analysis-label">Paragraphs</div>
+                            </div>
+                        </div>
+                        <div class="analysis-item">
+                            <div class="analysis-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="analysis-content">
+                                <div class="analysis-value" id="readingTime">0m</div>
+                                <div class="analysis-label">Reading Time</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Stats & Tools -->
+            <div class="right-column">
+                <!-- Real-time Stats -->
+                <div class="stats-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-tachometer-alt"></i> Real-time Statistics</h2>
+                    </div>
+                    <div class="stats-content">
+                        <div class="stat-item">
+                            <div class="stat-info">
+                                <span class="stat-label">Characters (with spaces)</span>
+                                <span class="stat-value" id="charWithSpaces">0</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="charProgress"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-item">
+                            <div class="stat-info">
+                                <span class="stat-label">Characters (without spaces)</span>
+                                <span class="stat-value" id="charWithoutSpaces">0</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="charNoSpacesProgress"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-item">
+                            <div class="stat-info">
+                                <span class="stat-label">Speaking Time</span>
+                                <span class="stat-value" id="speakingTime">0m</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="speakingProgress"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-item">
+                            <div class="stat-info">
+                                <span class="stat-label">Long Sentences</span>
+                                <span class="stat-value" id="longSentences">0</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="longSentencesProgress"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Platform Tools -->
+                <div class="tools-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-wrench"></i> Platform Tools</h2>
+                    </div>
+                    <div class="tools-content">
+                        <div class="platform-buttons">
+                            <button class="platform-btn active" data-platform="all">
+                                <i class="fas fa-globe"></i> All
+                            </button>
+                            <button class="platform-btn" data-platform="youtube">
+                                <i class="fab fa-youtube"></i> YouTube
+                            </button>
+                            <button class="platform-btn" data-platform="twitter">
+                                <i class="fab fa-twitter"></i> Twitter
+                            </button>
+                            <button class="platform-btn" data-platform="instagram">
+                                <i class="fab fa-instagram"></i> Instagram
+                            </button>
+                        </div>
+                        
+                        <div class="platform-info" id="platformInfo">
+                            <h4>Word Count Guidelines</h4>
+                            <ul>
+                                <li>Twitter: 280 characters max</li>
+                                <li>Instagram Caption: 2,200 characters</li>
+                                <li>YouTube Description: 5,000 characters</li>
+                                <li>Blog Post: 1,500-2,500 words</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="actions-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
+                    </div>
+                    <div class="actions-grid">
+                        <button class="action-btn" id="countWordsBtn">
+                            <i class="fas fa-calculator"></i>
+                            <span>Count Words</span>
+                        </button>
+                        <button class="action-btn" id="checkGrammarBtn">
+                            <i class="fas fa-spell-check"></i>
+                            <span>Check Grammar</span>
+                        </button>
+                        <button class="action-btn" id="summarizeBtn">
+                            <i class="fas fa-compress-alt"></i>
+                            <span>Summarize</span>
+                        </button>
+                        <button class="action-btn" id="exportTxtBtn">
+                            <i class="fas fa-file-export"></i>
+                            <span>Export as TXT</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advanced Features -->
+        <div class="advanced-features">
+            <div class="section-header">
+                <h2><i class="fas fa-star"></i> Advanced Features</h2>
+                <p>Get more insights about your text</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Readability Score</h3>
+                    <div class="score-display">
+                        <div class="score-value" id="readabilityScore">100</div>
+                        <div class="score-label">Easy to Read</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="readabilityProgress"></div>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Timing Calculator</h3>
+                    <div class="timing-display">
+                        <div class="timing-item">
+                            <span>15 sec video:</span>
+                            <span id="time15">0 words</span>
+                        </div>
+                        <div class="timing-item">
+                            <span>30 sec video:</span>
+                            <span id="time30">0 words</span>
+                        </div>
+                        <div class="timing-item">
+                            <span>60 sec video:</span>
+                            <span id="time60">0 words</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-edit"></i>
+                    </div>
+                    <h3>Writing Goals</h3>
+                    <div class="goal-setter">
+                        <input type="number" id="wordGoal" placeholder="Set word goal" value="1000">
+                        <button class="btn-small" id="setGoalBtn">Set</button>
+                    </div>
+                    <div class="goal-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="goalProgress"></div>
+                        </div>
+                        <span id="goalText">0/1000 words</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <i class="fas fa-keyboard"></i>
+                        <span>WordMaster<span class="highlight">Pro</span></span>
+                    </div>
+                    <p class="footer-description">
+                        Free online word counter and writing tool for writers, students, and professionals.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Features</h3>
+                    <ul>
+                        <li><a href="#">Word Counter</a></li>
+                        <li><a href="#">Character Counter</a></li>
+                        <li><a href="#">Sentence Counter</a></li>
+                        <li><a href="#">Reading Time</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Tools</h3>
+                    <ul>
+                        <li><a href="#">Grammar Check</a></li>
+                        <li><a href="#">Plagiarism Check</a></li>
+                        <li><a href="#">Summarizer</a></li>
+                        <li><a href="#">Paraphrase Tool</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 WordMaster Pro. All rights reserved. Made with ❤️ for writers everywhere.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <i class="fas fa-check-circle"></i>
+            <span id="toastMessage">Text copied to clipboard!</span>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="script.js"></script>
+</body>
+</html>
